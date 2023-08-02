@@ -1,4 +1,3 @@
-print('Hello, Wordl!')
-print('henrique'.upper())
-print(40+30)
-#Comentário em Python
+#!/usr/bin/env python3
+# Este programa imprime Hello World
+print('Hello, Wordl!') # este é uma tag 
