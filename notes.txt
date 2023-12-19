@@ -1,0 +1,4 @@
+minha primeira nota	geral	Minha nota
+minha segunda nota	tech	Python é legal
+teste2	tech	Este é mais um teste.
+Teste 3	saude	Este é um texto de saúde na tag saúde.
