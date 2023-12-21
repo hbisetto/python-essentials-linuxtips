@@ -3,19 +3,18 @@
 import os
 import sys
 
-if os.path.exists("names.txt"):
-    print("The file exists")
-    input("...") # Race Condition
+# EAFP - Easy to Ask Forgiveness than Permission
+
+try:
     names = open("names.txt").readlines()
-else:  
-    print("[Error] Files names.txt not found")
+    1/0 # Se fosse 1/0 seria um ZeroDivisionError
+    print(names.append) # Se não tivesse esse atributo seria um AttributeError
+except (FileNotFoundError, ZeroDivisionError) as e:
+    print(f"{str(e)}.")
     sys.exit(1)
-
-# LBYL - Look Before You Leap
-
-if len(names) >= 3:
+try:
     print(names[2])
-else:
+except:
     print("[Error]: Missing name in the list")
     sys.exit(1)
     
