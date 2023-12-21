@@ -7,11 +7,14 @@ import sys
 
 try:
     names = open("names.txt").readlines()
-    1/0 # Se fosse 1/0 seria um ZeroDivisionError
-    print(names.append) # Se não tivesse esse atributo seria um AttributeError
-except (FileNotFoundError, ZeroDivisionError) as e:
+except FileNotFoundError as e:
     print(f"{str(e)}.")
     sys.exit(1)
+else: 
+    print("Success!")
+finally:
+    print("Run this every time.")
+    
 try:
     print(names[2])
 except:
