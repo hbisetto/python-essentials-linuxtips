@@ -1,0 +1,4 @@
+Minha primeira nota	geral	Minha primeira nota
+Minha seguda nota	tecnologia	Python é muito bom!
+Minha terceira nota	geral	Minha terceira nota!
+Minha quarta nota	tecnologia	Java também é legal!
