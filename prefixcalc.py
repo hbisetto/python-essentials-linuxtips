@@ -27,6 +27,19 @@ n2: 4
 __version__ = "0.1.0"
 
 import sys
+import logging
+import os
+
+log_level = os.getenv("LOG_LEVEL", "WARNING").upper()
+log = logging.Logger("logs.py", log_level)
+ch = logging.StreamHandler()
+ch.setLevel(log_level)
+fmt = logging.Formatter(
+    '%(asctime)s  %(name)s  %(levelname)s l:%(lineno)d f:%(filename)s: %(message)s'
+)
+ch.setFormatter(fmt)
+log.addHandler(ch)
+
 
 arguments =  sys.argv[1:]
 
@@ -46,8 +59,10 @@ operation, *nums = arguments
 valid_operations = ('sum', 'sub', 'mul', 'div')
 
 if operation not in valid_operations:
-    print("Operação inválida")
-    print(valid_operations)
+    log.error(
+        "Operação inválida. \n"
+        "%s", valid_operations
+    )
     sys.exit(1)
 
 validated_nums = []
@@ -61,7 +76,11 @@ for num in nums:
         num = int(num)
     validated_nums.append(num)
 
-n1, n2 = validated_nums #unpack 
+try: 
+    n1, n2 = validated_nums #unpack 
+except ValueError as e:
+    print(str(e))
+    sys.exit(1)
 
 # TODO: Usar dict de funcoes
 if operation == "sum":

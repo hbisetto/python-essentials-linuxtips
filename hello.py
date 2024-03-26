@@ -34,6 +34,18 @@ __license__="Unlicense"
 
 import os
 import sys
+import logging
+
+log_level = os.getenv("LOG_LEVEL", "WARNING").upper()
+log = logging.Logger("logs.py", log_level)
+ch = logging.StreamHandler()
+ch.setLevel(log_level)
+fmt = logging.Formatter(
+    '%(asctime)s  %(name)s  %(levelname)s l:%(lineno)d f:%(filename)s: %(message)s'
+)
+ch.setFormatter(fmt)
+log.addHandler(ch)
+
 
 # print(f"{sys.argv=}")  # Exibe os argumentos passados na chamada do programa
                        # f string + objeto que quer imprimir + "="
@@ -49,10 +61,11 @@ for arg in sys.argv[1:]: # Para cada um dos argumentos em sys.argv começando a 
     try:        
         key, value = arg.split("=") # separa as informações que foram passadas a.antes do "=" e b. depois do "="
     except ValueError as e:
-        print(f"[Error] {str(e)}")
-        print("You need to use '='")
-        print(f"You passed {arg}")
-        print("Try with --key=value")
+        log.error(
+            "You need to use '=', you passed %s, try --key=value: %s",
+            arg,
+            str(e) 
+        )
         sys.exit(1)
     
     key = key.lstrip("-").strip()  # Para remover os "--" + remover o espaço normal(.strip())
@@ -82,6 +95,10 @@ msg = {
     "es_SP": "Hola, Mundo!",
     "fr_FR": "Bonjour, Monde!"    
 }
+
+"""
+message = msg.get(current_language, msg["en_US"]) # valor default
+"""
 
 try:
     message = msg[current_language]
