@@ -1,0 +1,8 @@
+title: Meu post
+tags: tech, geral
+date: 2024-03-28
+published: 0
+---
+Este é o meu post
+Aqui tem texto e conteúdo
+etc. etc. etc.
